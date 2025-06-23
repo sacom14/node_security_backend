@@ -1,13 +1,16 @@
 import express from 'express';
 import {
     login,
-    register
+    register,
+    deleteCoordinator
 } from '../controllers//authController.js';
+import { loginLimiter } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
 router.post('/register', register);
-router.post('/login', login);
+router.post('/login',loginLimiter, login);
+router.delete('/:id', deleteCoordinator);
 
 
 
